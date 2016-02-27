@@ -1,1 +1,48 @@
-.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}
+.widget-status-message, .widget-error-message {
+  border: 1px solid #c00;
+  background: #fac7c7;
+  padding: 10px;
+  display: none;
+}
+
+.outerwrapper {
+  width: 100%;
+  min-height: 900px;
+  position: relative;
+  border: 1px solid #c8c7cf;
+  display: none;
+}
+.outerwrapper .header {
+  margin: 0px 0px 20px;
+}
+.outerwrapper .header h2 {
+  padding: 10px 15px;
+  margin: 0;
+}
+.outerwrapper .header p {
+  padding: 0 15px;
+  margin: 0px 0px 10px;
+}
+.outerwrapper .chart {
+  position: relative;
+  line-height: 0;
+  margin: 0 15px;
+}
+.outerwrapper .chart h3 {
+  position: absolute;
+  margin: 0;
+  top: 20px;
+  left: 10px;
+  z-index: 99;
+  font-size: 1.5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.outerwrapper .chart svg {
+  cursor: crosshair;
+}
+.outerwrapper .chart svg .country path {
+  cursor: pointer;
+}

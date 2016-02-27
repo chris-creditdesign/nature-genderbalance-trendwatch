@@ -1,11 +1,799 @@
 <style scoped>
-.outerwrapper{width:100%;min-height:900px;position:relative;border:1px solid #c8c7cf}.outerwrapper h2,.outerwrapper h3,.outerwrapper p{padding:10px 10px 0;margin:0}
+.widget-status-message, .widget-error-message {
+  border: 1px solid #c00;
+  background: #fac7c7;
+  padding: 10px;
+  display: none;
+}
+
+.outerwrapper {
+  width: 100%;
+  min-height: 900px;
+  position: relative;
+  border: 1px solid #c8c7cf;
+  display: none;
+}
+.outerwrapper .header {
+  margin: 0px 0px 20px;
+}
+.outerwrapper .header h2 {
+  padding: 10px 15px;
+  margin: 0;
+}
+.outerwrapper .header p {
+  padding: 0 15px;
+  margin: 0px 0px 10px;
+}
+.outerwrapper .chart {
+  position: relative;
+  line-height: 0;
+  margin: 0 15px;
+}
+.outerwrapper .chart h3 {
+  position: absolute;
+  margin: 0;
+  top: 20px;
+  left: 10px;
+  z-index: 99;
+  font-size: 1.5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.outerwrapper .chart svg {
+  cursor: crosshair;
+}
+.outerwrapper .chart svg .country path {
+  cursor: pointer;
+}
+
 </style>
+<noscript>
+	This interactive graphic requires javascript to be enabled.
+</noscript>
+
+<div class="widget-status-message" id="widget-status-message">
+	<p>This interactive graphic requires a modern browser (e.g. Chrome, Safari or Firefox) with javascript enabled.</p>
+</div>
+
+<div class="widget-error-message">
+	<p>The data needed for this interactive graphic has failed to load.</p>
+</div>
+
+
 <div class="outerwrapper">
-	<h2>I hope this works!</h2>
-	<div class="chart"></div>
+	<div class="header">
+		<h2>INTERACTIVE: Headline</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam id impedit, eos fugit, similique cum, voluptate quis laborum nulla consequuntur quas eveniet obcaecati alias vel perspiciatis fugiat odit hic at.</p>
+	</div>
+
+
+	<div class="chart" id="chart"></div>
 </div>
 <!--[if gt IE 8]><!-->
 <script type="text/javascript">
+function buildParams () {
+	var params = {};
+
+	var contentWidth = jQuery("#content").width();
+
+	params.mapScale = 100;
+	params.zoomMin = 1;
+	params.zoomMax = 8;
+	params.ticks = 20;
+	params.mapRatio = 0.5;
+	params.mapBackground = "#efefef";
+
+	if ( contentWidth < 450 ) {
+		params.mapScale = 50;
+		params.ticks = 5;
+		params.mapRatio = 0.8;
+	}
+
+	params.uiColour = {
+		veryLightGrey: "#ddd",
+		lightGrey: "#999",
+		grey: "#666",
+		darkGrey: "#333",
+		noData: "#ccc",
+		lineColour: "#cb181d",
+		vaccinationLineColour: "#238b45"	
+	};
+
+	params.key = {
+		keyRange: [0, 0.1, 0.2, 0.3],
+		keyHead: "Cases of measles",
+	};
+
+	/* Target ids */
+	params.mapTarget = "#chart";
+
+	/*	Map margin, width and height */
+	params.mapMargin = {top: 0, right: 15, bottom: 0, left: 15};
+	params.mapWidth = contentWidth  - params.mapMargin.left - params.mapMargin.right;
+	params.mapHeight = (contentWidth * params.mapRatio) - params.mapMargin.top - params.mapMargin.bottom;
+	params.center = [ params.mapWidth / 2, params.mapHeight / 2];
+
+	/*	barChart margin, width and height */
+	params.barChartMargin = {top: 10, right: 10, bottom: 20, left: 70};
+	params.barChartWidth = contentWidth - params.barChartMargin.left - params.barChartMargin.right - 30;
+	params.barChartHeight = 100;
+
+	params.format = d3.format("0,000");
+
+	params.duration = 100;
+
+	/* Max value is 1122285 -> from Excel */
+	params.color = d3.scale.linear()
+					.range(["#fff5f0","#fee0d2","#fcbba1","#fc9272"])
+					.domain(params.key.keyRange)
+					.clamp(true);
+
+	params.projection = d3.geo.mercator()
+						.scale(params.mapScale)
+    					.translate([(params.mapWidth * 0.5), (params.mapHeight * 0.6)]);
+
+	params.path = d3.geo.path()
+					.projection(params.projection);
+
+	return params;
+}
+
+function BuildWidget (params, features, worldData) {
+	this.params = params;
+	this.features = features;
+	this.world = worldData;
+	this.pubsub = {};
+}
+BuildWidget.prototype.buildMap = function() {
+	var self = this;
+
+	this.svg = d3.select(this.params.mapTarget).append("svg")
+					.attr("width", this.params.mapWidth)
+					.attr("height", this.params.mapHeight);
+
+	this.svgBG = this.svg.append("rect")
+						.attr("x", 0)
+						.attr("y", 0)
+						.attr("width", this.params.mapWidth)
+						.attr("height", this.params.mapHeight)
+						.attr("fill", this.params.mapBackground);
+				  
+	this.defs = this.svg.append("defs").append("svg:clipPath")
+					.attr("id", "clip")
+				  .append("svg:rect")
+					.attr("x", 0)
+					.attr("y", 0)
+					.attr("width", this.params.mapWidth)
+					.attr("height", this.params.mapHeight);
+
+	this.clipGroupSvg = this.svg.append("g").attr("clip-path", "url(#clip)");
+
+	this.countriesSvg = this.clipGroupSvg.append("g").attr("class","country");
+	this.bordersSvg = this.clipGroupSvg.append("g");
+
+	this.zoom = d3.behavior.zoom()
+					.translate([0, 0])
+					.scale(1)
+					.scaleExtent([this.params.zoomMin, this.params.zoomMax])
+					.on("zoom", zoomed);
+
+	this.svg.call(this.zoom);
+
+	this.countriesSvg.selectAll("path")
+		.data(this.features)
+		.enter().append("path")
+		.attr("d", this.params.path)
+		.attr("id", function (d) {
+			return d.id;
+		})
+		.attr("fill", function (d) {
+			if ( d.caseData ) {
+				if ( self.params.showCases ) {
+					if ( d.caseData[0][self.params.year] === "noData") {
+						return self.params.uiColour.noData;
+					} else {
+						return self.params.color(d.caseData[0][self.params.year]);
+					}
+				} else if ( d.vaccineData ) {
+					if ( d.vaccineData[0][self.params.year] === "noData") {
+						return self.params.uiColour.noData;
+					} else {
+						return self.params.vaccinationColor(d.vaccineData[0][self.params.year]);
+					}					
+				}
+			} else {
+				return self.params.uiColour.noData;
+			}
+		});
+
+		// .on("click", function (d,i) {
+		// 	self.params.selectedFeature = i;
+		// 	self.pubsub.publish("newCountryChosen");
+		// });
+
+	this.bordersSvg.append("path")
+		.datum(topojson.mesh(self.world, self.world.objects.units, function(a, b) { return a !== b; }))
+		.attr("d", this.params.path)
+		.attr("class", "subunit-boundary")
+		.attr("fill", "none")
+		.attr("stroke", "#666")
+		.attr("stroke-width", "0.1px");
+
+	// this.yearLabel = d3.select(this.params.mapTarget).append("h3");
+
+	// this.yearLabel.text(this.params.year);
+	
+	function zoomed() {
+		self.countriesSvg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+		self.bordersSvg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+	}
+
+};
+
+var data = [
+{
+	"Academy": "Cuban Academy of Sciences [**]",
+	"Country": "Cuba",
+	"women-members": 0.27,
+	"women-professors": 0.484,
+	"year": 2012,
+	"code": "CUB"
+},
+{
+	"Academy": "Caribbean Academy of Sciences [*]",
+	"Country": "Caribbean",
+	"women-members": 0.26,
+	"women-professors": 0,
+	"year": 0,
+	"code": 0
+},
+{
+	"Academy": "Academy of Sciences of the Czech Republic",
+	"Country": "Czech Republic",
+	"women-members": 0.24,
+	"women-professors": 0.275,
+	"year": 2012,
+	"code": "CZE"
+},
+{
+	"Academy": "Academy of Science of South Africa",
+	"Country": "South Africa",
+	"women-members": 0.24,
+	"women-professors": 0.437,
+	"year": 2012,
+	"code": "ZAF"
+},
+{
+	"Academy": "Academia Mexicana de Ciencias  [*]",
+	"Country": "Mexico",
+	"women-members": 0.23,
+	"women-professors": 0.316,
+	"year": 2003,
+	"code": "MEX"
+},
+{
+	"Academy": "Nicaraguan Academy of Sciences [*]",
+	"Country": "Nicaragua",
+	"women-members": 0.23,
+	"women-professors": 0.425,
+	"year": 2002,
+	"code": "NIC"
+},
+{
+	"Academy": "Academia Nacional de Ciencias",
+	"Country": "Peru",
+	"women-members": 0.2,
+	"women-professors": 0,
+	"year": 0,
+	"code": "PER"
+},
+{
+	"Academy": "National Academy of Sciences of Uruguay [*]",
+	"Country": "Uruguay",
+	"women-members": 0.19,
+	"women-professors": 0.496,
+	"year": 2012,
+	"code": "URY"
+},
+{
+	"Academy": "National Academy of Sciences of Sri Lanka",
+	"Country": "Sri Lanka",
+	"women-members": 0.18,
+	"women-professors": 0.368,
+	"year": 2010,
+	"code": "LKA"
+},
+{
+	"Academy": "Latvian Academy of Sciences",
+	"Country": "Latvia",
+	"women-members": 0.18,
+	"women-professors": 0.528,
+	"year": 2012,
+	"code": "LVA"
+},
+{
+	"Academy": "National Academy of Sciences of Honduras [*]",
+	"Country": "Honduras",
+	"women-members": 0.17,
+	"women-professors": 0.265,
+	"year": 2003,
+	"code": "HND"
+},
+{
+	"Academy": "Finnish Academy of Science and Letters",
+	"Country": "Finland",
+	"women-members": 0.17,
+	"women-professors": 0.322,
+	"year": 2012,
+	"code": "FIN"
+},
+{
+	"Academy": "Science Council of Japan",
+	"Country": "Japan",
+	"women-members": 0.17,
+	"women-professors": 0.146,
+	"year": 2013,
+	"code": "JPN"
+},
+{
+	"Academy": "Swiss Academy of Medical Sciences",
+	"Country": "Switzerland",
+	"women-members": 0.17,
+	"women-professors": 0.324,
+	"year": 2012,
+	"code": "CHE"
+},
+{
+	"Academy": "Royal Society of Canada [*]",
+	"Country": "Canada",
+	"women-members": 0.16,
+	"women-professors": 0,
+	"year": 0,
+	"code": "CAN"
+},
+{
+	"Academy": "Academy of Sciences Malaysia",
+	"Country": "Malaysia",
+	"women-members": 0.15,
+	"women-professors": 0.487,
+	"year": 2011,
+	"code": "MYS"
+},
+{
+	"Academy": "Academy of Sciences and Arts of Bosnia and Herzegovina",
+	"Country": "Bosnia and Herzegovina",
+	"women-members": 0.15,
+	"women-professors": 0,
+	"year": 0,
+	"code": "BIH"
+},
+{
+	"Academy": "Royal Irish Academy",
+	"Country": "Ireland",
+	"women-members": 0.14,
+	"women-professors": 0.324,
+	"year": 2011,
+	"code": "IRL"
+},
+{
+	"Academy": "Venezuelan Academy of Physical, Mathematical and Natural Sciences [*]",
+	"Country": "Venezuela",
+	"women-members": 0.14,
+	"women-professors": 0.574,
+	"year": 2011,
+	"code": "VEN"
+},
+{
+	"Academy": "National Academy of Sciences of Costa Rica [*]",
+	"Country": "Costa Rica",
+	"women-members": 0.14,
+	"women-professors": 0.43,
+	"year": 2011,
+	"code": "CRI"
+},
+{
+	"Academy": "Royal Netherlands Academy of Arts and Sciences",
+	"Country": "Netherlands",
+	"women-members": 0.14,
+	"women-professors": 0.241,
+	"year": 2011,
+	"code": "NLD"
+},
+{
+	"Academy": "Colombian Academy of Exact, Physical and Natural Sciences [*]",
+	"Country": "Colombia",
+	"women-members": 0.14,
+	"women-professors": 0.378,
+	"year": 2012,
+	"code": "COL"
+},
+{
+	"Academy": "Austrian Academy of Sciences",
+	"Country": "Austria",
+	"women-members": 0.13,
+	"women-professors": 0.29,
+	"year": 2011,
+	"code": "AUT"
+},
+{
+	"Academy": "Academy of Sciences of the Dominican Republic [*]",
+	"Country": "Dominican Republic",
+	"women-members": 0.13,
+	"women-professors": 0,
+	"year": 0,
+	"code": "DOM"
+},
+{
+	"Academy": "Brazilian Academy of Sciences [**]",
+	"Country": "Brazil",
+	"women-members": 0.13,
+	"women-professors": 0.497,
+	"year": 2010,
+	"code": "BRA"
+},
+{
+	"Academy": "Uganda National Academy of Sciences",
+	"Country": "Uganda",
+	"women-members": 0.13,
+	"women-professors": 0.243,
+	"year": 2010,
+	"code": "UGA"
+},
+{
+	"Academy": "The Royal Swedish Academy of Sciences",
+	"Country": "Sweden",
+	"women-members": 0.13,
+	"women-professors": 0.372,
+	"year": 2011,
+	"code": "SWE"
+},
+{
+	"Academy": "US National Academy of Sciences (NAS)",
+	"Country": "United States",
+	"women-members": 0.13,
+	"women-professors": 0,
+	"year": 0,
+	"code": "USA"
+},
+{
+	"Academy": "Academy of Medical, Physical and Natural Sciences [***]",
+	"Country": "Guatemala",
+	"women-members": 0.12,
+	"women-professors": 0.447,
+	"year": 2012,
+	"code": "GTM"
+},
+{
+	"Academy": "Chilean Academy of Sciences [*]",
+	"Country": "Chile",
+	"women-members": 0.12,
+	"women-professors": 0.308,
+	"year": 2012,
+	"code": "CHL"
+},
+{
+	"Academy": "National Academy of Exact, Physical and Natural Sciences [*]",
+	"Country": "Argentina",
+	"women-members": 0.12,
+	"women-professors": 0.512,
+	"year": 2012,
+	"code": "ARG"
+},
+{
+	"Academy": "Ghana Academy of Arts and Sciences",
+	"Country": "Ghana",
+	"women-members": 0.11,
+	"women-professors": 0.183,
+	"year": 2010,
+	"code": "GHA"
+},
+{
+	"Academy": "Cameroon Academy of Sciences",
+	"Country": "Cameroon",
+	"women-members": 0.11,
+	"women-professors": 0.218,
+	"year": 2008,
+	"code": "CMR"
+},
+{
+	"Academy": "Academy of Sciences of Albania",
+	"Country": "Albania",
+	"women-members": 0.1,
+	"women-professors": 0.443,
+	"year": 2008,
+	"code": "ALB"
+},
+{
+	"Academy": "Croatian Academy of Sciences and Arts",
+	"Country": "Croatia",
+	"women-members": 0.1,
+	"women-professors": 0.477,
+	"year": 2012,
+	"code": "HRV"
+},
+{
+	"Academy": "German National Academy of Sciences Leopoldina",
+	"Country": "Germany",
+	"women-members": 0.1,
+	"women-professors": 0.268,
+	"year": 2011,
+	"code": "DEU"
+},
+{
+	"Academy": "Hassan II Academy of Science and Technology",
+	"Country": "Morocco",
+	"women-members": 0.1,
+	"women-professors": 0.302,
+	"year": 2011,
+	"code": "MAR"
+},
+{
+	"Academy": "Australian Academy of Science",
+	"Country": "Australia",
+	"women-members": 0.1,
+	"women-professors": 0,
+	"year": 0,
+	"code": "AUS"
+},
+{
+	"Academy": "Swiss Academy of Engineering Sciences",
+	"Country": "Switzerland",
+	"women-members": 0.1,
+	"women-professors": 0.324,
+	"year": 2012,
+	"code": "CHE"
+},
+{
+	"Academy": "Serbian Academy of Sciences and Arts",
+	"Country": "Serbia",
+	"women-members": 0.09,
+	"women-professors": 0.493,
+	"year": 2011,
+	"code": "SRB"
+},
+{
+	"Academy": "Montenegrin Academy of Sciences and Arts",
+	"Country": "Montenegro",
+	"women-members": 0.09,
+	"women-professors": 0.499,
+	"year": 2011,
+	"code": "MNE"
+},
+{
+	"Academy": "Nigerian Academy of Science",
+	"Country": "Nigeria",
+	"women-members": 0.09,
+	"women-professors": 0.233,
+	"year": 2007,
+	"code": "NGA"
+},
+{
+	"Academy": "Royal Society of New Zealand",
+	"Country": "New Zealand",
+	"women-members": 0.09,
+	"women-professors": 0.52,
+	"year": 2001,
+	"code": "NZL"
+},
+{
+	"Academy": "Turkish Academy of Sciences",
+	"Country": "Turkey",
+	"women-members": 0.09,
+	"women-professors": 0.362,
+	"year": 2013,
+	"code": "TUR"
+},
+{
+	"Academy": "National Academy of Sciences of Bolivia [*]",
+	"Country": "Bolivia",
+	"women-members": 0.09,
+	"women-professors": 0.653,
+	"year": 2010,
+	"code": "BOL"
+},
+{
+	"Academy": "Real Academia de Ciencias Exactas, Físicas y Naturales",
+	"Country": "Spain",
+	"women-members": 0.08,
+	"women-professors": 0.388,
+	"year": 2012,
+	"code": "ESP"
+},
+{
+	"Academy": "Académie des sciences – Institut de France",
+	"Country": "France",
+	"women-members": 0.08,
+	"women-professors": 0.256,
+	"year": 2012,
+	"code": "FRA"
+},
+{
+	"Academy": "Pakistan Academy of Sciences",
+	"Country": "Pakistan",
+	"women-members": 0.08,
+	"women-professors": 0.272,
+	"year": 2011,
+	"code": "PAK"
+},
+{
+	"Academy": "Georgian National Academy of Sciences",
+	"Country": "Georgia",
+	"women-members": 0.08,
+	"women-professors": 0.527,
+	"year": 2005,
+	"code": "GEO"
+},
+{
+	"Academy": "Bangladesh Academy of Sciences (BAS)",
+	"Country": "Bangladesh",
+	"women-members": 0.07,
+	"women-professors": 0.14,
+	"year": 1997,
+	"code": "BGD"
+},
+{
+	"Academy": "Kenya National Academy of Sciences",
+	"Country": "Kenya",
+	"women-members": 0.07,
+	"women-professors": 0.257,
+	"year": 2010,
+	"code": "KEN"
+},
+{
+	"Academy": "Palestine Academy for Science and Technology",
+	"Country": "Palestine",
+	"women-members": 0.07,
+	"women-professors": 0.249,
+	"year": 2010,
+	"code": "PSE"
+},
+{
+	"Academy": "The Royal Society",
+	"Country": "United Kingdom",
+	"women-members": 0.06,
+	"women-professors": 0.378,
+	"year": 2012,
+	"code": "GBR"
+},
+{
+	"Academy": "Sudanese National Academy of Sciences",
+	"Country": "Sudan",
+	"women-members": 0.06,
+	"women-professors": 0.4,
+	"year": 2005,
+	"code": "SDN"
+},
+{
+	"Academy": "Indian National Science Academy",
+	"Country": "India",
+	"women-members": 0.06,
+	"women-professors": 0.15,
+	"year": 2010,
+	"code": "IND"
+},
+{
+	"Academy": "Chinese Academy of Sciences",
+	"Country": "China",
+	"women-members": 0.06,
+	"women-professors": 0,
+	"year": 0,
+	"code": "CHN"
+},
+{
+	"Academy": "Accademia Nazionale dei Lincei",
+	"Country": "Italy",
+	"women-members": 0.05,
+	"women-professors": 0.355,
+	"year": 2012,
+	"code": "ITA"
+},
+{
+	"Academy": "Slovenian Academy of Sciences and Arts",
+	"Country": "Slovenia",
+	"women-members": 0.05,
+	"women-professors": 0.358,
+	"year": 2012,
+	"code": "SVN"
+},
+{
+	"Academy": "Hungarian Academy of Sciences",
+	"Country": "Hungary",
+	"women-members": 0.05,
+	"women-professors": 0.309,
+	"year": 2012,
+	"code": "HUN"
+},
+{
+	"Academy": "Ethiopian Academy of Sciences",
+	"Country": "Ethiopia",
+	"women-members": 0.05,
+	"women-professors": 0.076,
+	"year": 2010,
+	"code": "ETH"
+},
+{
+	"Academy": "Mongolian Academy of Sciences",
+	"Country": "Mongolia",
+	"women-members": 0.05,
+	"women-professors": 0.492,
+	"year": 2011,
+	"code": "MNG"
+},
+{
+	"Academy": "Polish Academy of Sciences",
+	"Country": "Poland",
+	"women-members": 0.04,
+	"women-professors": 0.383,
+	"year": 2012,
+	"code": "POL"
+},
+{
+	"Academy": "Tanzania Academy of Sciences",
+	"Country": "Tanzania",
+	"women-members": 0.04,
+	"women-professors": 0.254,
+	"year": 2010,
+	"code": "TZA"
+}
+];
+(function() {
+	var init = function($)	{
+		/*	Load D3 */
+		// var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
+		var countriesURL = "data/countries.json";
+		// var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
+		var d3URL = "data/d3.v3.min.js";
+		// var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
+		var topojsonURL = "data/topojson.v1.min.js";
+
+		$.when( $.getScript(d3URL), $.getScript(topojsonURL))
+			.then(function () {
+				var worldData;
+
+				d3.json(countriesURL, function (error, world) {
+					if (error) {
+						$(".widget-error-message").css("display", "block");
+						console.log(error);
+					} else {
+						worldData = world;
+						buildGraphic();
+					}
+				});
+
+				function buildGraphic() {
+					$(".outerwrapper").css("display","block");
+
+					var features = topojson.feature(worldData, worldData.objects.units).features;
+					var params = buildParams();
+
+					for (var i = 0; i < features.length; i++) {
+
+						for (var j = 0; j < data.length; j++) {
+							if (data[j].code === features[i].id) {
+								features[i].data = data[j];
+								// need to work out what to do with Switzerland
+							}
+						}
+					}
+
+					var map = new BuildWidget(params, features, worldData);
+
+					/*	Call functions to bulid the map */
+					map.buildMap();
+				}
+
+			});
+	};
+
+	setTimeout(function() {
+		if (typeof jQuery !== 'undefined'){
+			init(jQuery);
+		} else {
+			setTimeout(arguments.callee, 60);
+		}
+	}, 60);
+})();
 </script>
 <!--<![endif]-->

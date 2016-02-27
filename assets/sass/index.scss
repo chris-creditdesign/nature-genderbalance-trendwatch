@@ -1,7 +1,8 @@
-.status-message {
+.widget-status-message, .widget-error-message {
 	border: 1px solid #c00;
 	background: #fac7c7;
 	padding: 10px;
+	display: none;
 }
 
 .outerwrapper {
@@ -9,10 +10,44 @@
 	min-height: 900px;
 	position: relative;
 	border: 1px solid #c8c7cf;
+	display: none;
 
-	h2,h3,p {
-		padding: 10px 10px 0 10px;
-		margin: 0;
+	.header {
+		margin: 0px 0px 20px;
+
+		h2 {
+			padding: 10px 15px;
+			margin: 0;
+		}
+
+		p {
+			padding: 0 15px;
+			margin: 0px 0px 10px;
+		}
+	}
+
+	.chart {
+		position: relative;
+		line-height: 0;
+		margin: 0 15px;
+
+		h3 {
+			position: absolute;
+			margin: 0;
+			top: 20px;
+			left: 10px;
+			z-index: 99;
+			font-size: 1.5em;
+			user-select: none;			
+		}
+
+		svg {
+			cursor: crosshair;
+
+			.country path {
+				cursor: pointer;
+			}
+		}
 	}
 
 } // outerwrapper
