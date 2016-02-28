@@ -8,7 +8,7 @@ function buildParams () {
 	params.zoomMax = 8;
 	params.ticks = 20;
 	params.mapRatio = 0.5;
-	params.mapBackground = "#efefef";
+	params.mapBackground = "#E2EDF3";
 
 	if ( contentWidth < 450 ) {
 		params.mapScale = 50;
@@ -33,6 +33,7 @@ function buildParams () {
 
 	/* Target ids */
 	params.mapTarget = "#chart";
+	params.keyTarget = "#key";
 
 	/*	Map margin, width and height */
 	params.mapMargin = {top: 0, right: 15, bottom: 0, left: 15};
@@ -49,9 +50,8 @@ function buildParams () {
 
 	params.duration = 100;
 
-	/* Max value is 1122285 -> from Excel */
-	params.color = d3.scale.linear()
-					.range(["#fff5f0","#fee0d2","#fcbba1","#fc9272"])
+	params.colour = d3.scale.linear()
+					.range(["#a6bddb","#74a9cf","#2b8cbe","#045a8d"])
 					.domain(params.key.keyRange)
 					.clamp(true);
 

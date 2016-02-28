@@ -42,6 +42,8 @@
 
 					/*	Call functions to bulid the map */
 					map.buildMap();
+					map.buildKey();
+					map.buildTooltip();
 				}
 
 			});

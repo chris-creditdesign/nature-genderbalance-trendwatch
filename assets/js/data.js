@@ -1,503 +1,503 @@
 var data = [
 {
-	"Academy": "Cuban Academy of Sciences [**]",
-	"Country": "Cuba",
+	"academy": "Cuban Academy of Sciences [**]",
+	"country": "Cuba",
 	"women-members": 0.27,
 	"women-professors": 0.484,
 	"year": 2012,
 	"code": "CUB"
 },
 {
-	"Academy": "Caribbean Academy of Sciences [*]",
-	"Country": "Caribbean",
+	"academy": "Caribbean Academy of Sciences [*]",
+	"country": "Caribbean",
 	"women-members": 0.26,
 	"women-professors": 0,
 	"year": 0,
 	"code": 0
 },
 {
-	"Academy": "Academy of Sciences of the Czech Republic",
-	"Country": "Czech Republic",
+	"academy": "Academy of Sciences of the Czech Republic",
+	"country": "Czech Republic",
 	"women-members": 0.24,
 	"women-professors": 0.275,
 	"year": 2012,
 	"code": "CZE"
 },
 {
-	"Academy": "Academy of Science of South Africa",
-	"Country": "South Africa",
+	"academy": "Academy of Science of South Africa",
+	"country": "South Africa",
 	"women-members": 0.24,
 	"women-professors": 0.437,
 	"year": 2012,
 	"code": "ZAF"
 },
 {
-	"Academy": "Academia Mexicana de Ciencias  [*]",
-	"Country": "Mexico",
+	"academy": "Academia Mexicana de Ciencias  [*]",
+	"country": "Mexico",
 	"women-members": 0.23,
 	"women-professors": 0.316,
 	"year": 2003,
 	"code": "MEX"
 },
 {
-	"Academy": "Nicaraguan Academy of Sciences [*]",
-	"Country": "Nicaragua",
+	"academy": "Nicaraguan Academy of Sciences [*]",
+	"country": "Nicaragua",
 	"women-members": 0.23,
 	"women-professors": 0.425,
 	"year": 2002,
 	"code": "NIC"
 },
 {
-	"Academy": "Academia Nacional de Ciencias",
-	"Country": "Peru",
+	"academy": "Academia Nacional de Ciencias",
+	"country": "Peru",
 	"women-members": 0.2,
 	"women-professors": 0,
 	"year": 0,
 	"code": "PER"
 },
 {
-	"Academy": "National Academy of Sciences of Uruguay [*]",
-	"Country": "Uruguay",
+	"academy": "National Academy of Sciences of Uruguay [*]",
+	"country": "Uruguay",
 	"women-members": 0.19,
 	"women-professors": 0.496,
 	"year": 2012,
 	"code": "URY"
 },
 {
-	"Academy": "National Academy of Sciences of Sri Lanka",
-	"Country": "Sri Lanka",
+	"academy": "National Academy of Sciences of Sri Lanka",
+	"country": "Sri Lanka",
 	"women-members": 0.18,
 	"women-professors": 0.368,
 	"year": 2010,
 	"code": "LKA"
 },
 {
-	"Academy": "Latvian Academy of Sciences",
-	"Country": "Latvia",
+	"academy": "Latvian Academy of Sciences",
+	"country": "Latvia",
 	"women-members": 0.18,
 	"women-professors": 0.528,
 	"year": 2012,
 	"code": "LVA"
 },
 {
-	"Academy": "National Academy of Sciences of Honduras [*]",
-	"Country": "Honduras",
+	"academy": "National Academy of Sciences of Honduras [*]",
+	"country": "Honduras",
 	"women-members": 0.17,
 	"women-professors": 0.265,
 	"year": 2003,
 	"code": "HND"
 },
 {
-	"Academy": "Finnish Academy of Science and Letters",
-	"Country": "Finland",
+	"academy": "Finnish Academy of Science and Letters",
+	"country": "Finland",
 	"women-members": 0.17,
 	"women-professors": 0.322,
 	"year": 2012,
 	"code": "FIN"
 },
 {
-	"Academy": "Science Council of Japan",
-	"Country": "Japan",
+	"academy": "Science Council of Japan",
+	"country": "Japan",
 	"women-members": 0.17,
 	"women-professors": 0.146,
 	"year": 2013,
 	"code": "JPN"
 },
 {
-	"Academy": "Swiss Academy of Medical Sciences",
-	"Country": "Switzerland",
+	"academy": "Swiss Academy of Medical Sciences",
+	"country": "Switzerland",
 	"women-members": 0.17,
 	"women-professors": 0.324,
 	"year": 2012,
 	"code": "CHE"
 },
 {
-	"Academy": "Royal Society of Canada [*]",
-	"Country": "Canada",
+	"academy": "Royal Society of Canada [*]",
+	"country": "Canada",
 	"women-members": 0.16,
 	"women-professors": 0,
 	"year": 0,
 	"code": "CAN"
 },
 {
-	"Academy": "Academy of Sciences Malaysia",
-	"Country": "Malaysia",
+	"academy": "Academy of Sciences Malaysia",
+	"country": "Malaysia",
 	"women-members": 0.15,
 	"women-professors": 0.487,
 	"year": 2011,
 	"code": "MYS"
 },
 {
-	"Academy": "Academy of Sciences and Arts of Bosnia and Herzegovina",
-	"Country": "Bosnia and Herzegovina",
+	"academy": "Academy of Sciences and Arts of Bosnia and Herzegovina",
+	"country": "Bosnia and Herzegovina",
 	"women-members": 0.15,
 	"women-professors": 0,
 	"year": 0,
 	"code": "BIH"
 },
 {
-	"Academy": "Royal Irish Academy",
-	"Country": "Ireland",
+	"academy": "Royal Irish Academy",
+	"country": "Ireland",
 	"women-members": 0.14,
 	"women-professors": 0.324,
 	"year": 2011,
 	"code": "IRL"
 },
 {
-	"Academy": "Venezuelan Academy of Physical, Mathematical and Natural Sciences [*]",
-	"Country": "Venezuela",
+	"academy": "Venezuelan Academy of Physical, Mathematical and Natural Sciences [*]",
+	"country": "Venezuela",
 	"women-members": 0.14,
 	"women-professors": 0.574,
 	"year": 2011,
 	"code": "VEN"
 },
 {
-	"Academy": "National Academy of Sciences of Costa Rica [*]",
-	"Country": "Costa Rica",
+	"academy": "National Academy of Sciences of Costa Rica [*]",
+	"country": "Costa Rica",
 	"women-members": 0.14,
 	"women-professors": 0.43,
 	"year": 2011,
 	"code": "CRI"
 },
 {
-	"Academy": "Royal Netherlands Academy of Arts and Sciences",
-	"Country": "Netherlands",
+	"academy": "Royal Netherlands Academy of Arts and Sciences",
+	"country": "Netherlands",
 	"women-members": 0.14,
 	"women-professors": 0.241,
 	"year": 2011,
 	"code": "NLD"
 },
 {
-	"Academy": "Colombian Academy of Exact, Physical and Natural Sciences [*]",
-	"Country": "Colombia",
+	"academy": "Colombian Academy of Exact, Physical and Natural Sciences [*]",
+	"country": "Colombia",
 	"women-members": 0.14,
 	"women-professors": 0.378,
 	"year": 2012,
 	"code": "COL"
 },
 {
-	"Academy": "Austrian Academy of Sciences",
-	"Country": "Austria",
+	"academy": "Austrian Academy of Sciences",
+	"country": "Austria",
 	"women-members": 0.13,
 	"women-professors": 0.29,
 	"year": 2011,
 	"code": "AUT"
 },
 {
-	"Academy": "Academy of Sciences of the Dominican Republic [*]",
-	"Country": "Dominican Republic",
+	"academy": "Academy of Sciences of the Dominican Republic [*]",
+	"country": "Dominican Republic",
 	"women-members": 0.13,
 	"women-professors": 0,
 	"year": 0,
 	"code": "DOM"
 },
 {
-	"Academy": "Brazilian Academy of Sciences [**]",
-	"Country": "Brazil",
+	"academy": "Brazilian Academy of Sciences [**]",
+	"country": "Brazil",
 	"women-members": 0.13,
 	"women-professors": 0.497,
 	"year": 2010,
 	"code": "BRA"
 },
 {
-	"Academy": "Uganda National Academy of Sciences",
-	"Country": "Uganda",
+	"academy": "Uganda National Academy of Sciences",
+	"country": "Uganda",
 	"women-members": 0.13,
 	"women-professors": 0.243,
 	"year": 2010,
 	"code": "UGA"
 },
 {
-	"Academy": "The Royal Swedish Academy of Sciences",
-	"Country": "Sweden",
+	"academy": "The Royal Swedish Academy of Sciences",
+	"country": "Sweden",
 	"women-members": 0.13,
 	"women-professors": 0.372,
 	"year": 2011,
 	"code": "SWE"
 },
 {
-	"Academy": "US National Academy of Sciences (NAS)",
-	"Country": "United States",
+	"academy": "US National Academy of Sciences (NAS)",
+	"country": "United States",
 	"women-members": 0.13,
 	"women-professors": 0,
 	"year": 0,
 	"code": "USA"
 },
 {
-	"Academy": "Academy of Medical, Physical and Natural Sciences [***]",
-	"Country": "Guatemala",
+	"academy": "Academy of Medical, Physical and Natural Sciences [***]",
+	"country": "Guatemala",
 	"women-members": 0.12,
 	"women-professors": 0.447,
 	"year": 2012,
 	"code": "GTM"
 },
 {
-	"Academy": "Chilean Academy of Sciences [*]",
-	"Country": "Chile",
+	"academy": "Chilean Academy of Sciences [*]",
+	"country": "Chile",
 	"women-members": 0.12,
 	"women-professors": 0.308,
 	"year": 2012,
 	"code": "CHL"
 },
 {
-	"Academy": "National Academy of Exact, Physical and Natural Sciences [*]",
-	"Country": "Argentina",
+	"academy": "National Academy of Exact, Physical and Natural Sciences [*]",
+	"country": "Argentina",
 	"women-members": 0.12,
 	"women-professors": 0.512,
 	"year": 2012,
 	"code": "ARG"
 },
 {
-	"Academy": "Ghana Academy of Arts and Sciences",
-	"Country": "Ghana",
+	"academy": "Ghana Academy of Arts and Sciences",
+	"country": "Ghana",
 	"women-members": 0.11,
 	"women-professors": 0.183,
 	"year": 2010,
 	"code": "GHA"
 },
 {
-	"Academy": "Cameroon Academy of Sciences",
-	"Country": "Cameroon",
+	"academy": "Cameroon Academy of Sciences",
+	"country": "Cameroon",
 	"women-members": 0.11,
 	"women-professors": 0.218,
 	"year": 2008,
 	"code": "CMR"
 },
 {
-	"Academy": "Academy of Sciences of Albania",
-	"Country": "Albania",
+	"academy": "Academy of Sciences of Albania",
+	"country": "Albania",
 	"women-members": 0.1,
 	"women-professors": 0.443,
 	"year": 2008,
 	"code": "ALB"
 },
 {
-	"Academy": "Croatian Academy of Sciences and Arts",
-	"Country": "Croatia",
+	"academy": "Croatian Academy of Sciences and Arts",
+	"country": "Croatia",
 	"women-members": 0.1,
 	"women-professors": 0.477,
 	"year": 2012,
 	"code": "HRV"
 },
 {
-	"Academy": "German National Academy of Sciences Leopoldina",
-	"Country": "Germany",
+	"academy": "German National Academy of Sciences Leopoldina",
+	"country": "Germany",
 	"women-members": 0.1,
 	"women-professors": 0.268,
 	"year": 2011,
 	"code": "DEU"
 },
 {
-	"Academy": "Hassan II Academy of Science and Technology",
-	"Country": "Morocco",
+	"academy": "Hassan II Academy of Science and Technology",
+	"country": "Morocco",
 	"women-members": 0.1,
 	"women-professors": 0.302,
 	"year": 2011,
 	"code": "MAR"
 },
 {
-	"Academy": "Australian Academy of Science",
-	"Country": "Australia",
+	"academy": "Australian Academy of Science",
+	"country": "Australia",
 	"women-members": 0.1,
 	"women-professors": 0,
 	"year": 0,
 	"code": "AUS"
 },
 {
-	"Academy": "Swiss Academy of Engineering Sciences",
-	"Country": "Switzerland",
+	"academy": "Swiss Academy of Engineering Sciences",
+	"country": "Switzerland",
 	"women-members": 0.1,
 	"women-professors": 0.324,
 	"year": 2012,
 	"code": "CHE"
 },
 {
-	"Academy": "Serbian Academy of Sciences and Arts",
-	"Country": "Serbia",
+	"academy": "Serbian Academy of Sciences and Arts",
+	"country": "Serbia",
 	"women-members": 0.09,
 	"women-professors": 0.493,
 	"year": 2011,
 	"code": "SRB"
 },
 {
-	"Academy": "Montenegrin Academy of Sciences and Arts",
-	"Country": "Montenegro",
+	"academy": "Montenegrin Academy of Sciences and Arts",
+	"country": "Montenegro",
 	"women-members": 0.09,
 	"women-professors": 0.499,
 	"year": 2011,
 	"code": "MNE"
 },
 {
-	"Academy": "Nigerian Academy of Science",
-	"Country": "Nigeria",
+	"academy": "Nigerian Academy of Science",
+	"country": "Nigeria",
 	"women-members": 0.09,
 	"women-professors": 0.233,
 	"year": 2007,
 	"code": "NGA"
 },
 {
-	"Academy": "Royal Society of New Zealand",
-	"Country": "New Zealand",
+	"academy": "Royal Society of New Zealand",
+	"country": "New Zealand",
 	"women-members": 0.09,
 	"women-professors": 0.52,
 	"year": 2001,
 	"code": "NZL"
 },
 {
-	"Academy": "Turkish Academy of Sciences",
-	"Country": "Turkey",
+	"academy": "Turkish Academy of Sciences",
+	"country": "Turkey",
 	"women-members": 0.09,
 	"women-professors": 0.362,
 	"year": 2013,
 	"code": "TUR"
 },
 {
-	"Academy": "National Academy of Sciences of Bolivia [*]",
-	"Country": "Bolivia",
+	"academy": "National Academy of Sciences of Bolivia [*]",
+	"country": "Bolivia",
 	"women-members": 0.09,
 	"women-professors": 0.653,
 	"year": 2010,
 	"code": "BOL"
 },
 {
-	"Academy": "Real Academia de Ciencias Exactas, Físicas y Naturales",
-	"Country": "Spain",
+	"academy": "Real Academia de Ciencias Exactas, Físicas y Naturales",
+	"country": "Spain",
 	"women-members": 0.08,
 	"women-professors": 0.388,
 	"year": 2012,
 	"code": "ESP"
 },
 {
-	"Academy": "Académie des sciences – Institut de France",
-	"Country": "France",
+	"academy": "Académie des sciences – Institut de France",
+	"country": "France",
 	"women-members": 0.08,
 	"women-professors": 0.256,
 	"year": 2012,
 	"code": "FRA"
 },
 {
-	"Academy": "Pakistan Academy of Sciences",
-	"Country": "Pakistan",
+	"academy": "Pakistan Academy of Sciences",
+	"country": "Pakistan",
 	"women-members": 0.08,
 	"women-professors": 0.272,
 	"year": 2011,
 	"code": "PAK"
 },
 {
-	"Academy": "Georgian National Academy of Sciences",
-	"Country": "Georgia",
+	"academy": "Georgian National Academy of Sciences",
+	"country": "Georgia",
 	"women-members": 0.08,
 	"women-professors": 0.527,
 	"year": 2005,
 	"code": "GEO"
 },
 {
-	"Academy": "Bangladesh Academy of Sciences (BAS)",
-	"Country": "Bangladesh",
+	"academy": "Bangladesh Academy of Sciences (BAS)",
+	"country": "Bangladesh",
 	"women-members": 0.07,
 	"women-professors": 0.14,
 	"year": 1997,
 	"code": "BGD"
 },
 {
-	"Academy": "Kenya National Academy of Sciences",
-	"Country": "Kenya",
+	"academy": "Kenya National Academy of Sciences",
+	"country": "Kenya",
 	"women-members": 0.07,
 	"women-professors": 0.257,
 	"year": 2010,
 	"code": "KEN"
 },
 {
-	"Academy": "Palestine Academy for Science and Technology",
-	"Country": "Palestine",
+	"academy": "Palestine Academy for Science and Technology",
+	"country": "Palestine",
 	"women-members": 0.07,
 	"women-professors": 0.249,
 	"year": 2010,
 	"code": "PSE"
 },
 {
-	"Academy": "The Royal Society",
-	"Country": "United Kingdom",
+	"academy": "The Royal Society",
+	"country": "United Kingdom",
 	"women-members": 0.06,
 	"women-professors": 0.378,
 	"year": 2012,
 	"code": "GBR"
 },
 {
-	"Academy": "Sudanese National Academy of Sciences",
-	"Country": "Sudan",
+	"academy": "Sudanese National Academy of Sciences",
+	"country": "Sudan",
 	"women-members": 0.06,
 	"women-professors": 0.4,
 	"year": 2005,
 	"code": "SDN"
 },
 {
-	"Academy": "Indian National Science Academy",
-	"Country": "India",
+	"academy": "Indian National Science Academy",
+	"country": "India",
 	"women-members": 0.06,
 	"women-professors": 0.15,
 	"year": 2010,
 	"code": "IND"
 },
 {
-	"Academy": "Chinese Academy of Sciences",
-	"Country": "China",
+	"academy": "Chinese Academy of Sciences",
+	"country": "China",
 	"women-members": 0.06,
 	"women-professors": 0,
 	"year": 0,
 	"code": "CHN"
 },
 {
-	"Academy": "Accademia Nazionale dei Lincei",
-	"Country": "Italy",
+	"academy": "Accademia Nazionale dei Lincei",
+	"country": "Italy",
 	"women-members": 0.05,
 	"women-professors": 0.355,
 	"year": 2012,
 	"code": "ITA"
 },
 {
-	"Academy": "Slovenian Academy of Sciences and Arts",
-	"Country": "Slovenia",
+	"academy": "Slovenian Academy of Sciences and Arts",
+	"country": "Slovenia",
 	"women-members": 0.05,
 	"women-professors": 0.358,
 	"year": 2012,
 	"code": "SVN"
 },
 {
-	"Academy": "Hungarian Academy of Sciences",
-	"Country": "Hungary",
+	"academy": "Hungarian Academy of Sciences",
+	"country": "Hungary",
 	"women-members": 0.05,
 	"women-professors": 0.309,
 	"year": 2012,
 	"code": "HUN"
 },
 {
-	"Academy": "Ethiopian Academy of Sciences",
-	"Country": "Ethiopia",
+	"academy": "Ethiopian Academy of Sciences",
+	"country": "Ethiopia",
 	"women-members": 0.05,
 	"women-professors": 0.076,
 	"year": 2010,
 	"code": "ETH"
 },
 {
-	"Academy": "Mongolian Academy of Sciences",
-	"Country": "Mongolia",
+	"academy": "Mongolian Academy of Sciences",
+	"country": "Mongolia",
 	"women-members": 0.05,
 	"women-professors": 0.492,
 	"year": 2011,
 	"code": "MNG"
 },
 {
-	"Academy": "Polish Academy of Sciences",
-	"Country": "Poland",
+	"academy": "Polish Academy of Sciences",
+	"country": "Poland",
 	"women-members": 0.04,
 	"women-professors": 0.383,
 	"year": 2012,
 	"code": "POL"
 },
 {
-	"Academy": "Tanzania Academy of Sciences",
-	"Country": "Tanzania",
+	"academy": "Tanzania Academy of Sciences",
+	"country": "Tanzania",
 	"women-members": 0.04,
 	"women-professors": 0.254,
 	"year": 2010,

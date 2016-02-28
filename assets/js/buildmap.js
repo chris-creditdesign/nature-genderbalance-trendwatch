@@ -40,30 +40,20 @@ BuildWidget.prototype.buildMap = function() {
 		.attr("id", function (d) {
 			return d.id;
 		})
+		.attr("stroke-width", 0)
+		.attr("stroke", "#666")
 		.attr("fill", function (d) {
-			if ( d.caseData ) {
-				if ( self.params.showCases ) {
-					if ( d.caseData[0][self.params.year] === "noData") {
+			if ( d.data ) {
+					if ( d.data["women-members"] === 0) {
 						return self.params.uiColour.noData;
 					} else {
-						return self.params.color(d.caseData[0][self.params.year]);
-					}
-				} else if ( d.vaccineData ) {
-					if ( d.vaccineData[0][self.params.year] === "noData") {
-						return self.params.uiColour.noData;
-					} else {
-						return self.params.vaccinationColor(d.vaccineData[0][self.params.year]);
-					}					
-				}
+						return self.params.colour(d.data["women-members"]);
+					}		
+
 			} else {
 				return self.params.uiColour.noData;
 			}
 		});
-
-		// .on("click", function (d,i) {
-		// 	self.params.selectedFeature = i;
-		// 	self.pubsub.publish("newCountryChosen");
-		// });
 
 	this.bordersSvg.append("path")
 		.datum(topojson.mesh(self.world, self.world.objects.units, function(a, b) { return a !== b; }))
@@ -72,12 +62,9 @@ BuildWidget.prototype.buildMap = function() {
 		.attr("fill", "none")
 		.attr("stroke", "#666")
 		.attr("stroke-width", "0.1px");
-
-	// this.yearLabel = d3.select(this.params.mapTarget).append("h3");
-
-	// this.yearLabel.text(this.params.year);
 	
 	function zoomed() {
+		self.hideTooltip();
 		self.countriesSvg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
 		self.bordersSvg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
 	}

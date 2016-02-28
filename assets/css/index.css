@@ -7,7 +7,6 @@
 
 .outerwrapper {
   width: 100%;
-  min-height: 900px;
   position: relative;
   border: 1px solid #c8c7cf;
   display: none;
@@ -26,7 +25,7 @@
 .outerwrapper .chart {
   position: relative;
   line-height: 0;
-  margin: 0 15px;
+  margin: 0 15px 15px;
 }
 .outerwrapper .chart h3 {
   position: absolute;
@@ -45,4 +44,54 @@
 }
 .outerwrapper .chart svg .country path {
   cursor: pointer;
+}
+.outerwrapper .key {
+  margin-bottom: 10px;
+}
+.outerwrapper .key h3 {
+  padding: 0 15px 5px;
+  margin: 0;
+}
+.outerwrapper .key ul {
+  margin: 0px 15px 0px 5px;
+  padding: 0;
+}
+.outerwrapper .key li {
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 10px;
+  line-height: 1em;
+  border-left: 1px solid black;
+  min-width: 60px;
+}
+.outerwrapper .widget-tooltip {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  padding: 6px 10px 6px 15px;
+  color: #ccc;
+  background-color: #333;
+  pointer-events: none;
+  border-radius: 5px;
+  font-size: 0.8em;
+  line-height: 1.4em;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.outerwrapper .widget-tooltip p {
+  padding: 0;
+  margin: 0;
+}
+.outerwrapper .widget-tooltip span {
+  font-weight: bold;
+  color: #fff;
+}
+.outerwrapper .widget-tooltip-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
