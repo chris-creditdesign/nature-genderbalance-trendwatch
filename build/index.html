@@ -308,7 +308,7 @@ BuildWidget.prototype.buildTooltip = function () {
 
 			if (d.data) {
 				var myCountry = d3.select(this);
-				myCountry.attr("stroke-width", 1);
+				myCountry.attr("stroke-width", 0.5);
 
 				var tooltipWidth = parseInt(d3.select("#widget-tooltip").style("padding-left"),10) + parseInt(d3.select("#widget-tooltip").style("width"),10) + parseInt(d3.select("#widget-tooltip").style("padding-right"),10);
 
@@ -414,6 +414,10 @@ BuildWidget.prototype.buildMap = function() {
 		self.bordersSvg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
 	}
 
+};
+
+BuildWidget.prototype.destroyMap = function() {
+	this.svg.remove();
 };
 
 var data = [
@@ -935,6 +939,7 @@ var data = [
 		$.when( $.getScript(d3URL), $.getScript(topojsonURL))
 			.then(function () {
 				var worldData;
+				var width = $(window).width();
 
 				d3.json(countriesURL, function (error, world) {
 					if (error) {
@@ -968,9 +973,31 @@ var data = [
 					map.buildMap();
 					map.buildKey();
 					map.buildTooltip();
+
+					$( window ).resize(function() {
+						if($(window).width() != width){ 
+							width = $(window).width();
+							didResize = true;
+
+							/* Throttle the resize */
+							setTimeout(function () {
+								if (didResize) {
+									map.destroyMap();
+									map.params = buildParams();
+									map.buildMap();
+									map.buildTooltip();
+									
+									didResize = false;
+								}
+							}, 60);
+
+						}
+					});
 				}
 
-			});
+			}, function () {
+				$(".widget-error-message").css("display","block");
+		});
 	};
 
 	setTimeout(function() {

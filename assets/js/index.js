@@ -11,6 +11,7 @@
 		$.when( $.getScript(d3URL), $.getScript(topojsonURL))
 			.then(function () {
 				var worldData;
+				var width = $(window).width();
 
 				d3.json(countriesURL, function (error, world) {
 					if (error) {
@@ -44,9 +45,31 @@
 					map.buildMap();
 					map.buildKey();
 					map.buildTooltip();
+
+					$( window ).resize(function() {
+						if($(window).width() != width){ 
+							width = $(window).width();
+							didResize = true;
+
+							/* Throttle the resize */
+							setTimeout(function () {
+								if (didResize) {
+									map.destroyMap();
+									map.params = buildParams();
+									map.buildMap();
+									map.buildTooltip();
+									
+									didResize = false;
+								}
+							}, 60);
+
+						}
+					});
 				}
 
-			});
+			}, function () {
+				$(".widget-error-message").css("display","block");
+		});
 	};
 
 	setTimeout(function() {

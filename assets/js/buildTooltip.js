@@ -14,7 +14,7 @@ BuildWidget.prototype.buildTooltip = function () {
 
 			if (d.data) {
 				var myCountry = d3.select(this);
-				myCountry.attr("stroke-width", 1);
+				myCountry.attr("stroke-width", 0.5);
 
 				var tooltipWidth = parseInt(d3.select("#widget-tooltip").style("padding-left"),10) + parseInt(d3.select("#widget-tooltip").style("width"),10) + parseInt(d3.select("#widget-tooltip").style("padding-right"),10);
 

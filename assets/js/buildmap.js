@@ -70,3 +70,7 @@ BuildWidget.prototype.buildMap = function() {
 	}
 
 };
+
+BuildWidget.prototype.destroyMap = function() {
+	this.svg.remove();
+};
