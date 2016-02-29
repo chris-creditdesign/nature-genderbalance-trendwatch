@@ -5,7 +5,8 @@ BuildWidget.prototype.buildTooltip = function () {
 		if (num === 0) {
 			return "Not available";
 		} else {
-			return Math.floor((num * 100)) + "%";
+			var precent = num * 100;
+			return Math.round(precent) + "%";
 		}
 	}
 

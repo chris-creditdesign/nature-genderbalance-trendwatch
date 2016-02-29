@@ -55,10 +55,6 @@ function buildParams () {
 					.range(params.key.keyColour)
 					.domain(params.key.keyRange);
 
-	// params.colour = d3.scale.threshold()
-	// 				.domain(params.key.keyRange)
-	// 				.range(params.key.keyColour);
-
 	params.projection = d3.geo.mercator()
 						.scale(params.mapScale)
 						.translate([(params.mapWidth * 0.5), (params.mapHeight * 0.6)]);
