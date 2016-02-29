@@ -29,7 +29,7 @@ BuildWidget.prototype.buildKey = function() {
 			});
 	  
 	this.list.append("li")
-		.text("Not available")
+		.text("Data not available")
 		.style("border-top-color", self.params.uiColour.noData);
 
 

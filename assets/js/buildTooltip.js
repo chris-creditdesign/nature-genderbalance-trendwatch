@@ -3,7 +3,7 @@ BuildWidget.prototype.buildTooltip = function () {
 
 	function formatPercent(num) {
 		if (num === 0) {
-			return "Not available";
+			return "Data not available";
 		} else {
 			var precent = num * 100;
 			return Math.round(precent) + "%";

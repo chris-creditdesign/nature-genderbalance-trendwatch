@@ -1,6 +1,6 @@
 var data = [
 {
-	"academy": "Cuban Academy of Sciences [**]",
+	"academy": "Cuban Academy of Sciences",
 	"country": "Cuba",
 	"women-members": 0.27,
 	"women-researchers": 0.484,
@@ -10,7 +10,7 @@ var data = [
 	"code": "CUB"
 },
 {
-	"academy": "Caribbean Academy of Sciences [*]",
+	"academy": "Caribbean Academy of Sciences",
 	"country": "Caribbean",
 	"women-members": 0.26,
 	"women-researchers": 0,
@@ -40,7 +40,7 @@ var data = [
 	"code": "ZAF"
 },
 {
-	"academy": "Academia Mexicana de Ciencias  [*]",
+	"academy": "Academia Mexicana de Ciencias",
 	"country": "Mexico",
 	"women-members": 0.23,
 	"women-researchers": 0.316,
@@ -50,7 +50,7 @@ var data = [
 	"code": "MEX"
 },
 {
-	"academy": "Nicaraguan Academy of Sciences [*]",
+	"academy": "Nicaraguan Academy of Sciences",
 	"country": "Nicaragua",
 	"women-members": 0.23,
 	"women-researchers": 0.425,
@@ -70,7 +70,7 @@ var data = [
 	"code": "PER"
 },
 {
-	"academy": "National Academy of Sciences of Uruguay [*]",
+	"academy": "National Academy of Sciences of Uruguay",
 	"country": "Uruguay",
 	"women-members": 0.19,
 	"women-researchers": 0.496,
@@ -100,7 +100,7 @@ var data = [
 	"code": "LVA"
 },
 {
-	"academy": "National Academy of Sciences of Honduras [*]",
+	"academy": "National Academy of Sciences of Honduras",
 	"country": "Honduras",
 	"women-members": 0.17,
 	"women-researchers": 0.265,
@@ -140,7 +140,7 @@ var data = [
 	"code": "CHE"
 },
 {
-	"academy": "Royal Society of Canada [*]",
+	"academy": "Royal Society of Canada",
 	"country": "Canada",
 	"women-members": 0.16,
 	"women-researchers": 0,
@@ -180,7 +180,7 @@ var data = [
 	"code": "IRL"
 },
 {
-	"academy": "Venezuelan Academy of Physical, Mathematical and Natural Sciences [*]",
+	"academy": "Venezuelan Academy of Physical, Mathematical and Natural Sciences",
 	"country": "Venezuela",
 	"women-members": 0.14,
 	"women-researchers": 0.574,
@@ -190,7 +190,7 @@ var data = [
 	"code": "VEN"
 },
 {
-	"academy": "National Academy of Sciences of Costa Rica [*]",
+	"academy": "National Academy of Sciences of Costa Rica",
 	"country": "Costa Rica",
 	"women-members": 0.14,
 	"women-researchers": 0.43,
@@ -210,7 +210,7 @@ var data = [
 	"code": "NLD"
 },
 {
-	"academy": "Colombian Academy of Exact, Physical and Natural Sciences [*]",
+	"academy": "Colombian Academy of Exact, Physical and Natural Sciences",
 	"country": "Colombia",
 	"women-members": 0.14,
 	"women-researchers": 0.378,
@@ -230,7 +230,7 @@ var data = [
 	"code": "AUT"
 },
 {
-	"academy": "Academy of Sciences of the Dominican Republic [*]",
+	"academy": "Academy of Sciences of the Dominican Republic",
 	"country": "Dominican Republic",
 	"women-members": 0.13,
 	"women-researchers": 0,
@@ -240,7 +240,7 @@ var data = [
 	"code": "DOM"
 },
 {
-	"academy": "Brazilian Academy of Sciences [**]",
+	"academy": "Brazilian Academy of Sciences",
 	"country": "Brazil",
 	"women-members": 0.13,
 	"women-researchers": 0.497,
@@ -280,7 +280,7 @@ var data = [
 	"code": "USA"
 },
 {
-	"academy": "Academy of Medical, Physical and Natural Sciences [***]",
+	"academy": "Academy of Medical, Physical and Natural Sciences",
 	"country": "Guatemala",
 	"women-members": 0.12,
 	"women-researchers": 0.447,
@@ -290,7 +290,7 @@ var data = [
 	"code": "GTM"
 },
 {
-	"academy": "Chilean Academy of Sciences [*]",
+	"academy": "Chilean Academy of Sciences",
 	"country": "Chile",
 	"women-members": 0.12,
 	"women-researchers": 0.308,
@@ -300,7 +300,7 @@ var data = [
 	"code": "CHL"
 },
 {
-	"academy": "National Academy of Exact, Physical and Natural Sciences [*]",
+	"academy": "National Academy of Exact, Physical and Natural Sciences",
 	"country": "Argentina",
 	"women-members": 0.12,
 	"women-researchers": 0.512,
@@ -440,7 +440,7 @@ var data = [
 	"code": "TUR"
 },
 {
-	"academy": "National Academy of Sciences of Bolivia [*]",
+	"academy": "National Academy of Sciences of Bolivia",
 	"country": "Bolivia",
 	"women-members": 0.09,
 	"women-researchers": 0.653,
