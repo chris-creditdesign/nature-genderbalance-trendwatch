@@ -48,6 +48,10 @@
 					map.buildKey();
 					map.buildTooltip();
 
+					if ( $("#content").width() >= 350 ) {
+						map.buildZoom();
+					}
+
 					$( window ).resize(function() {
 						if($(window).width() != width){ 
 							width = $(window).width();
@@ -60,6 +64,10 @@
 									map.params = buildParams();
 									map.buildMap();
 									map.buildTooltip();
+
+									if ( $("#content").width() >= 350 ) {
+										map.buildZoom();
+									}
 									
 									didResize = false;
 								}
