@@ -28,6 +28,7 @@ function buildParams () {
 
 	params.key = {
 		keyRange: [0, 0.1, 0.2, 0.3],
+		keyColour: ["#fed976","#fd8d3c","#f03b20","#bd0026"],
 		keyHead: "Cases of measles",
 	};
 
@@ -51,13 +52,20 @@ function buildParams () {
 	params.duration = 100;
 
 	params.colour = d3.scale.linear()
-					.range(["#a6bddb","#74a9cf","#2b8cbe","#045a8d"])
-					.domain(params.key.keyRange)
-					.clamp(true);
+					.range(params.key.keyColour)
+					.domain(params.key.keyRange);
+
+	// params.colour = d3.scale.threshold()
+	// 				.domain(params.key.keyRange)
+	// 				.range(params.key.keyColour);
 
 	params.projection = d3.geo.mercator()
 						.scale(params.mapScale)
-    					.translate([(params.mapWidth * 0.5), (params.mapHeight * 0.6)]);
+						.translate([(params.mapWidth * 0.5), (params.mapHeight * 0.6)]);
+
+	/* params.projection = d3.geo.cylindricalStereographic()
+						 .translate([params.mapWidth/2, params.mapWidth/2])
+						 .scale([100]); */
 
 	params.path = d3.geo.path()
 					.projection(params.projection);

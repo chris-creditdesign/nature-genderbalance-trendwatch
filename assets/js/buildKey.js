@@ -12,16 +12,17 @@ BuildWidget.prototype.buildKey = function() {
 			.enter()
 		  .append("li")
 			.text(function (d,i) {
-				// if (i === (self.params.key.keyRange.length - 1) ) {
-				// 	return "≥ " + self.params.format(d);
-				// } else if (i === 0) {
-				// 	return "≤ " + self.params.format(d);
-				// } else {
-				// 	return self.params.format(d);
-				// }
 				var number = d * 100;
 
-				return "≥ " + number.toString() + "%";
+				/* if (i === (self.params.key.keyRange.length - 1) ) {
+					return "≥ " + self.params.format(d);
+				} else if (i === 0) {
+					return "≤ " + self.params.format(d);
+				} else {
+					return self.params.format(d);
+				} */
+
+				return number.toString() + "%";
 			})
 			.style("border-top-color", function (d) {
 				return self.params.colour(d);

@@ -7,10 +7,10 @@
 
 .outerwrapper {
 	width: 100%;
-	// min-height: 900px;
 	position: relative;
 	border: 1px solid #c8c7cf;
 	display: none;
+	margin-bottom: 100px;
 
 	.header {
 		margin: 0px 0px 20px;
@@ -69,15 +69,22 @@
 		li {
 				display: inline-block;
 				margin-top: 5px;
-				margin-left: 10px;
-				padding-left: 5px;
 				padding-top: 5px;
 				padding-right: 5px;
 				border-top-style: solid;
 				border-top-width: 10px;
 				line-height: 1em;
-				border-left: 1px solid black;
-				min-width: 60px;
+				min-width: 50px;
+				text-align: center;
+		}
+
+		li:first-child {
+			margin-left: 10px;
+		}
+
+		li:last-child {
+			margin-left: 10px;
+			text-align: left;
 		}
 	}
 
