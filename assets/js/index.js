@@ -1,12 +1,12 @@
 (function() {
 	var init = function($)	{
 		/*	Load D3 */
-		var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
-		// var countriesURL = "data/countries.json";
-		var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
-		// var d3URL = "data/d3.v3.min.js";
-		var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
-		// var topojsonURL = "data/topojson.v1.min.js";
+		// var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
+		var countriesURL = "data/countries.json";
+		// var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
+		var d3URL = "data/d3.v3.min.js";
+		// var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
+		var topojsonURL = "data/topojson.v1.min.js";
 
 		var gallUrl = "data/d3.geo.projection.v0.min.js";
 

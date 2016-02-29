@@ -34,9 +34,11 @@ BuildWidget.prototype.buildTooltip = function () {
 				
 				d3.select("#country").text(d.data.country);
 				d3.select("#academy").text(d.data.academy);
-				d3.select("#women-members").text( formatPercent(d.data["women-members"]) );
+				d3.select("#women-members").text( formatPercent(d.data["women-members"]) + " (2013)" );
+				d3.select("#women-researchers").text( formatPercent(d.data["women-researchers"]) );
+				d3.select("#year-researchers").text(d.data["year-researchers"] === 0 ? "" : "(" + d.data["year-researchers"] + ")");
 				d3.select("#women-professors").text( formatPercent(d.data["women-professors"]) );
-				d3.select("#year").text(d.data.year === 0 ? "Not available" : d.data.year);
+				d3.select("#year-professors").text(d.data["year-professors"] === 0 ? "" : "(" + d.data["year-professors"] + ")");
 			}
 
 		}).on("mouseout", function () {
