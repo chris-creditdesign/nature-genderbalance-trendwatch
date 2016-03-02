@@ -16,11 +16,11 @@
 			.then(function () {
 				var worldData;
 				var width = $(window).width();
+				var didResize;
 
 				d3.json(countriesURL, function (error, world) {
 					if (error) {
 						$(".widget-error-message").css("display", "block");
-						console.log(error);
 					} else {
 						worldData = world;
 						buildGraphic();

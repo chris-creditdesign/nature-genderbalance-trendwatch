@@ -1143,6 +1143,11 @@ var data = [
 		var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
 		var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
 		var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
+		
+		/* Testing urls */
+		/* var countriesURL = "data/countries.json";
+		var d3URL = "data/d3.v3.min.js";
+		var topojsonURL = "data/topojson.v1.min.js"; */
 
 		var gallUrl = "data/d3.geo.projection.v0.min.js";
 
@@ -1150,11 +1155,11 @@ var data = [
 			.then(function () {
 				var worldData;
 				var width = $(window).width();
+				var didResize;
 
 				d3.json(countriesURL, function (error, world) {
 					if (error) {
 						$(".widget-error-message").css("display", "block");
-						console.log(error);
 					} else {
 						worldData = world;
 						buildGraphic();
