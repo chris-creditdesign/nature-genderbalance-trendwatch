@@ -11,7 +11,6 @@
   position: relative;
   border: 1px solid #c8c7cf;
   display: none;
-  margin-bottom: 100px;
 }
 .outerwrapper .header {
   margin: 0px 0px 20px;
@@ -231,15 +230,6 @@ BuildWidget.prototype.buildKey = function() {
 		  .append("li")
 			.text(function (d,i) {
 				var number = d * 100;
-
-				/* if (i === (self.params.key.keyRange.length - 1) ) {
-					return "≥ " + self.params.format(d);
-				} else if (i === 0) {
-					return "≤ " + self.params.format(d);
-				} else {
-					return self.params.format(d);
-				} */
-
 				return number.toString() + "%";
 			})
 			.style("border-top-color", function (d) {
@@ -1150,12 +1140,9 @@ var data = [
 (function() {
 	var init = function($)	{
 		/*	Load D3 */
-		// var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
-		var countriesURL = "data/countries.json";
-		// var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
-		var d3URL = "data/d3.v3.min.js";
-		// var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
-		var topojsonURL = "data/topojson.v1.min.js";
+		var countriesURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/countries.json";
+		var d3URL = "http://www.nature.com/widget_assets_polopoly/v518n7538/d3.v3.min.js";
+		var topojsonURL = "http://www.nature.com/widget_assets_polopoly/v518n7538/topojson.v1.min.js";
 
 		var gallUrl = "data/d3.geo.projection.v0.min.js";
 
@@ -1185,7 +1172,6 @@ var data = [
 						for (var j = 0; j < data.length; j++) {
 							if (data[j].code === features[i].id) {
 								features[i].data = data[j];
-								// need to work out what to do with Switzerland
 							}
 						}
 					}

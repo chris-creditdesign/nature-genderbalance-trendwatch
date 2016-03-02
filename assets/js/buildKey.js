@@ -13,15 +13,6 @@ BuildWidget.prototype.buildKey = function() {
 		  .append("li")
 			.text(function (d,i) {
 				var number = d * 100;
-
-				/* if (i === (self.params.key.keyRange.length - 1) ) {
-					return "≥ " + self.params.format(d);
-				} else if (i === 0) {
-					return "≤ " + self.params.format(d);
-				} else {
-					return self.params.format(d);
-				} */
-
 				return number.toString() + "%";
 			})
 			.style("border-top-color", function (d) {
