@@ -1,9 +1,29 @@
-# Commands
+#Interactive graphic for @NatureNews
 
-Convert the excel file to a csv
-	in2csv -e iso-8859-1 Gender\ balance/data/gender-balance-data.xlsx > Gender\ balance/data/gender-balance-data.csv
+Built with [d3.js](http://d3js.org/).
 
-<!-- Remove quote marks
-	sed 's/"//g' data/gender-balance-data.csv > data/temp.csv && mv data/temp.csv data/gender-balance-data.csv -->
+Published at [http://www.nature.com/news/1.19465](http://www.nature.com/news/1.19465).
+
+### Build process
+
+Uses [Grunt](http://gruntjs.com/) for file concatenation, to compile [Sass](http://sass-lang.com/) and apply [JSHint](https://github.com/gruntjs/grunt-contrib-jshint). If you've not used Grunt before, be sure to check out the [getting started guide](http://gruntjs.com/getting-started).
+
+Install dependencies with `npm install`
+
+Type `grunt` to automatically watch for changes and concat a version of `index.html` into the build and dist folders.
+
+**build/index.html** can be used for local testing. You'll need to set up a local server, which is nice and easy to do with Python 2 on a mac.
+
+	cd build
+	python -m SimplHTTPServer 
+
+**dist/index.html** is a 'headerless' file ready to be copied into the polopoly CMS as a HTML widget.
+
+
+### Extract relevant data from CSV file
+
+Convert the excel file to a csv using [csvkit](http://csvkit.readthedocs.org/).
+
+	in2csv -e iso-8859-1 data/gender-balance-data.xlsx > data/gender-balance-data.csv
 
 Convert the csv to json at [http://www.csvjson.com/csv2json](http://www.csvjson.com/csv2json)
